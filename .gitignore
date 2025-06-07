@@ -1,0 +1,16 @@
+# Ignore Python stuff
+__pycache__/
+.env
+*.log
+
+# Ignore Node/Hardhat stuff
+node_modules/
+artifacts/
+cache/
+coverage/
+deployments/
+*.tsbuildinfo
+
+#Ignore specific Test files (if any of Python)
+StudentBadges/
+

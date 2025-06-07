@@ -1,0 +1,49 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract StudentBadgeNFT is ERC721URIStorage, Ownable {
+    uint256 public nextTokenId;
+
+    // Optional: Mapping badge type to cap
+    mapping(string => uint256) public badgeCap;
+    mapping(string => uint256) public badgeMinted;
+
+    event BadgeMinted(
+        address indexed to,
+        uint256 tokenId,
+        string badgeType,
+        string metadataURI
+    );
+
+    constructor() ERC721("StudentBadgeNFT", "SBNFT") Ownable(msg.sender) {}
+
+    function setBadgeCap(
+        string memory badgeType,
+        uint256 cap
+    ) external onlyOwner {
+        badgeCap[badgeType] = cap;
+    }
+
+    function mintBadge(
+        address recipient,
+        string memory tokenURI,
+        string memory badgeType
+    ) public onlyOwner {
+        require(
+            badgeMinted[badgeType] < badgeCap[badgeType],
+            "Minting limit reached for this badge"
+        );
+
+        uint256 tokenId = nextTokenId;
+        _safeMint(recipient, tokenId);
+        _setTokenURI(tokenId, tokenURI);
+
+        badgeMinted[badgeType]++;
+        nextTokenId++;
+
+        emit BadgeMinted(recipient, tokenId, badgeType, tokenURI);
+    }
+}
