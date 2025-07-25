@@ -20,7 +20,7 @@ accountAddress = os.getenv("ACCOUNT_ADDRESS")
 localRPC = "http://127.0.0.1:8545"
 
 # Contract and Pinata configuration
-contractJSON = r"D:\CIE_Internship2025\DemoV2\summer-2025\SW2\StudentNFT\Solidity\artifacts\contracts\StudentNFT.sol\StudentBadgeNFT.json"
+contractJSON = r"/run/media/purva/Personal Files/CIE_Internship2025/DemoV3/summer-2025/SW2/StudentNFT/Solidity/artifacts/contracts/StudentNFT.sol/StudentBadgeNFT.json"
 pinataJWT = os.getenv("PINATA_JWT")
 pinataBaseURL = os.getenv("PINATA_BASE_URL")
 pinataLegacyURL = os.getenv("PINATA_LEGACY_URL")
